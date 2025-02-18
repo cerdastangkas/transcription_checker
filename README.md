@@ -41,12 +41,55 @@ It flags speech that sounds odd, like:
    - "Is this person speaking unusually slow?" (like taking 4 seconds to say 3 words)
    - "Does this sound like normal conversation?"
 
-### Output
-- Creates detailed reports showing:
-  - All unusual parts found
-  - Audio clips of these parts for listening
-  - Charts and tables showing findings
-  - Interactive audio player for the weird parts
+### Output Reports
+The tool generates several types of reports in `data/reports/<folder_name>/`:
+
+1. **Interactive HTML Report** (`report_<timestamp>.html`)
+   - **Overview Section**
+     - Total segments analyzed
+     - Number of unusual segments found
+     - Average speaking rate (words per second)
+     - Distribution of speech patterns
+   
+   - **Interactive Data Table**
+     - Sortable columns for easy analysis
+     - Audio player embedded for each segment
+     - Color-coded rows for unusual segments
+     - Columns showing:
+       - Duration in seconds
+       - Word count
+       - Words per second
+       - Deviation score
+       - Full transcription text
+
+   - **Visualizations**
+     - Speaking rate distribution chart
+     - Word count vs duration scatter plot
+     - Unusual segments highlighted
+
+2. **CSV Report** (`report_<timestamp>.csv`)
+   - Detailed data for further analysis
+   - All metrics and calculations included
+   - Easy to import into other tools
+   - Columns include:
+     - Segment ID
+     - Audio file path
+     - Duration metrics
+     - Word count statistics
+     - Deviation scores
+     - Unusual flags
+
+3. **Audio Clips**
+   - Stored in `audio/` subfolder
+   - Contains only the unusual segments
+   - Original audio quality preserved
+   - Named for easy reference to report data
+
+4. **Summary Statistics**
+   - Overall dataset metrics
+   - Unusual pattern categories found
+   - Speaking rate ranges
+   - Common deviation patterns
 
 ## Usage
 
