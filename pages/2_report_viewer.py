@@ -82,6 +82,10 @@ def main():
         st.session_state.server_url = f'http://localhost:{port}'
 
     st.title("Report Viewer")
+    
+    # Initialize video_id in session state
+    if 'video_id' not in st.session_state:
+        st.session_state.video_id = None
 
     # Get list of HTML reports
     reports = get_html_reports()
@@ -90,15 +94,22 @@ def main():
         st.warning("No analysis reports found in data/reports directory")
         return
 
-    # Create report selection with folder info
-    selected_report = st.selectbox(
-        "Select Report",
-        reports,
-        format_func=lambda x: f"{x['filename']} ({x['folder']})"
-    )
+    # Create report selection with folder info in sidebar
+    with st.sidebar:
+        selected_report = st.selectbox(
+            "Select Report",
+            reports,
+            format_func=lambda x: f"{x['filename']} ({x['folder']})"
+        )
 
     # Display selected report
     if selected_report:
+        # Update video ID
+        video_id = selected_report['folder']
+        st.session_state.video_id = video_id
+        
+        # Display video ID as header
+        st.header(f"Video ID: {video_id}")
         # Read and display HTML content
         html_content = read_html_file(selected_report['path'])
         
