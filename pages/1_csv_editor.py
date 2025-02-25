@@ -33,11 +33,10 @@ def main():
         return
 
     # Create file selection in sidebar
-    with st.sidebar:
-        selected_file = st.selectbox(
-            "Select Unusual Cases File",
-            sorted(csv_files)
-        )
+    selected_file = st.selectbox(
+        "Select Unusual Cases File",
+        sorted(csv_files)
+    )
 
     if selected_file:
         file_path = os.path.join(reports_dir, selected_file)
